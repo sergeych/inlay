@@ -1,0 +1,76 @@
+<!doctype html>
+<meta charset="utf-8">
+<style>
+html,body {margin:0; height:100%; background:#ededf0; font-family:sans-serif}
+#viewport {height:100%; overflow:auto; display:grid; place-items:center}
+#picture {padding:16px; box-sizing:border-box; flex:none}
+#picture svg {display:block; max-width:none!important; background:white}
+#work {position:absolute; left:-100000px; top:0}
+</style>
+<div id="viewport"><div id="picture"></div></div><div id="work"></div>
+<script src="qrc:///qtwebchannel/qwebchannel.js"></script>
+<script src="mermaid.js"></script>
+<script>
+let bridge, latest=0, pending=null, running=false, dimensions=null, scale=1;
+const picture=document.getElementById('picture'), work=document.getElementById('work');
+function configure() {
+  mermaid.initialize({startOnLoad:false,securityLevel:'strict',theme:'default',
+    suppressErrorRendering:true,fontFamily:'DejaVu Sans, sans-serif',
+    htmlLabels:false,flowchart:{htmlLabels:false}});
+}
+window.invalidate = revision => { latest=revision; pending=null; };
+window.requestRender = (revision,source) => { latest=revision;pending={revision,source};pump(); };
+window.zoomDiagram = factor => {
+  if (!dimensions) return;
+  scale=Math.max(.05,Math.min(10,scale*factor));
+  const svg=picture.querySelector('svg');
+  svg.style.width=dimensions[0]*scale+'px';svg.style.height=dimensions[1]*scale+'px';
+};
+window.fitDiagram = () => {
+  if (!dimensions) return;
+  scale=Math.min((innerWidth-40)/dimensions[0],(innerHeight-40)/dimensions[1]);
+  window.zoomDiagram(1);
+};
+addEventListener('resize',window.fitDiagram);
+document.getElementById('viewport').addEventListener('wheel',e=>{
+  if(e.ctrlKey){e.preventDefault();window.zoomDiagram(e.deltaY<0?1.2:1/1.2);}
+},{passive:false});
+async function raster(svgText,w,h) {
+  const svg=new DOMParser().parseFromString(svgText,'image/svg+xml').documentElement;
+  svg.setAttribute('width',w);svg.setAttribute('height',h);
+  const url=URL.createObjectURL(new Blob([new XMLSerializer().serializeToString(svg)],{type:'image/svg+xml'}));
+  try {
+    const image=new Image();image.src=url;await image.decode();
+    const ratio=Math.min(2,8192/w,8192/h);
+    const canvas=document.createElement('canvas');canvas.width=Math.ceil(w*ratio);canvas.height=Math.ceil(h*ratio);
+    const ctx=canvas.getContext('2d');ctx.fillStyle='white';ctx.fillRect(0,0,canvas.width,canvas.height);
+    ctx.drawImage(image,0,0,canvas.width,canvas.height);return canvas.toDataURL('image/png');
+  } finally { URL.revokeObjectURL(url); }
+}
+async function pump() {
+  if(running || !bridge)return;
+  running=true;
+  while(pending){
+    const request=pending;pending=null;
+    try {
+      configure();
+      const {svg}=await mermaid.render('diagram'+request.revision,request.source,work);
+      const node=new DOMParser().parseFromString(svg,'image/svg+xml').documentElement;
+      const box=node.getAttribute('viewBox').split(/[ ,]+/).map(Number);
+      const w=box[2],h=box[3];
+      if(!(w>0&&h>0))throw Error('Diagram has no visible size');
+      const png=await raster(svg,w,h);
+      if(request.revision===latest){
+        picture.innerHTML=svg;dimensions=[w,h];window.fitDiagram();
+        bridge.finished(request.revision,png,'');
+      }
+    } catch(error){
+      if(request.revision===latest)bridge.finished(request.revision,'',String(error.message||error));
+    } finally {work.replaceChildren();}
+  }
+  running=false;
+}
+new QWebChannel(qt.webChannelTransport, channel=>{
+  bridge=channel.objects.bridge;bridge.loaded();pump();
+});
+</script>

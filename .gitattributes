@@ -1,0 +1,3 @@
+# Preserve generated upstream bundles without whitespace diagnostics.
+app/src/inlay/web/mermaid.js -whitespace linguist-generated=true
+app/src/inlay/web/mermaid.js.LEGAL.txt -whitespace

@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.egg-info/
+.pytest_cache/
+build/
+dist/
+.idea/
+.ruff_cache/
+.coverage
+htmlcov/
+node_modules/
+.DS_Store
+.local/
+docs/continuity-*.md
+docs/reflections/

@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "inlay-editor"
+version = "0.1.0"
+description = "Editable source inside your diagram"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.11"
+dependencies = ["PySide6>=6.8,<7", "Pillow>=11,<13"]
+
+[project.scripts]
+inlay = "inlay.app:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["inlay*"]
+
+[tool.setuptools.package-data]
+inlay = ["web/*"]

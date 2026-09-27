@@ -1,0 +1,9 @@
+flowchart LR
+    A[Alice] -->|0.9| B[Bob]
+    A -->|0.8| C[Carol]
+    B -->|0.7| T[Taras]
+    C -->|0.6| T
+    C -->|-1| M[Mallory]
+    style A fill:#e5efff,stroke:#3574b8
+    style T fill:#e7f5ec,stroke:#38855a
+    style M fill:#fce9e9,stroke:#b84646
