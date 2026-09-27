@@ -7,6 +7,7 @@ name = "inlay-editor"
 version = "0.1.0"
 description = "Editable source inside your diagram"
 readme = "README.md"
+authors = [{name = "sergeych"}, {name = "Codex (OpenAI), AI collaborator"}]
 license = "MIT"
 license-files = ["LICENSE"]
 requires-python = ">=3.11"

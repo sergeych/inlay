@@ -13,3 +13,5 @@ bin/inlay examples/trust.png
 
 See the repository README and docs/usage.md for behavior and limitations.
 Bundled Mermaid licenses are included alongside its JavaScript in `inlay/web/`.
+
+Authors: sergeych and Codex (OpenAI), AI collaborator.

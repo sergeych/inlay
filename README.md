@@ -14,7 +14,19 @@ picture that you can insert into documents or send to someone else.
 | AI skill | `skills/inlay/` | Portable instructions and source metadata helper |
 | LibreOffice extension | `integrations/libreoffice/` | Planned; integration design only |
 
-## Run the editor
+## Install on Linux
+
+From a checkout or extracted source ZIP:
+
+```sh
+./install.sh
+inlay
+```
+
+Installs for your user without sudo. See [Linux installation](docs/install-linux.md)
+for prerequisites, custom paths, updates and removal.
+
+## Run from the checkout
 
 Python 3.11 or newer is required. Linux is the currently verified platform.
 
@@ -51,6 +63,8 @@ The archive is written to `dist/inlay-skill.zip`.
 - [Development and tests](docs/development.md)
 - [Roadmap](docs/roadmap.md)
 - [LibreOffice integration plan](integrations/libreoffice/README.md)
+
+Created by **sergeych** and **Codex (OpenAI)**. See [authors](AUTHORS.md).
 
 Our code is licensed under [MIT](LICENSE). Bundled third-party code retains its
 own licenses; see [third-party notices](THIRD_PARTY_NOTICES.md).

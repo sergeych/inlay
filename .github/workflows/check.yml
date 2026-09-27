@@ -10,12 +10,17 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: sudo apt-get update && sudo apt-get install -y libegl1 libopengl0 libxkbcommon0 libnss3 libasound2t64 libxcb-cursor0 fonts-dejavu-core
+      - run: sudo apt-get update && sudo apt-get install -y libegl1 libopengl0 libxkbcommon0 libnss3 libasound2t64 libxcb-cursor0 fonts-dejavu-core libfontconfig1 libxcomposite1 libxdamage1 libxfixes3 libxrandr2 libxtst6 libxkbcommon-x11-0 libxcb-icccm4 libxcb-keysyms1 libxcb-shape0
       - run: python -m pip install -e ./app pytest build
       - run: python -m pytest -q
         env:
           QT_QPA_PLATFORM: offscreen
           QTWEBENGINE_CHROMIUM_FLAGS: --disable-gpu --no-sandbox
+      - name: Install outside checkout
+        run: |
+          ./install.sh --prefix "$RUNNER_TEMP/inlay install/app" --bin-dir "$RUNNER_TEMP/inlay install/bin"
+          cd "$RUNNER_TEMP"
+          "$RUNNER_TEMP/inlay install/bin/inlay" --help
       - run: python tools/sync_skill.py --check
       - run: python tools/build_skill.py
       - run: python -m build app --outdir dist

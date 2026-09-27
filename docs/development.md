@@ -26,3 +26,5 @@ license notices when updating the renderer.
 GitHub Actions runs tests and builds distributions; it does not publish a release.
 Do not package local environments, private continuity notes or IDE configuration.
 The root LICENSE is authoritative; keep app/LICENSE and skills/inlay/LICENSE in sync.
+
+For clean Linux installation and sandboxed GUI checks, see [Incus testing](testing-incus.md).
