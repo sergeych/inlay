@@ -36,5 +36,17 @@ retry after missing system libraries, launcher outside checkout, live Mermaid re
 PNG save and exact embedded source recovery passed. The installed package was used,
 not the source tree. Qt offscreen mode ran with Chromium sandbox enabled.
 
-Xvfb startup did not complete during this check; a normal X11/Wayland desktop session
-inside this container remains unverified. The host GUI was also opened independently.
+The visible preview also passed under Xvfb with software rendering and Chromium's
+sandbox enabled. Wait for painting after the render callback before taking a screenshot:
+the callback can precede the compositor's first visible frame. Wayland remains untested.
+
+Reusable check (run with the installed interpreter, not a development PYTHONPATH):
+
+```sh
+QTWEBENGINE_CHROMIUM_FLAGS=--disable-gpu xvfb-run -a ~/.local/share/inlay/venv/bin/python /path/to/inlay/tools/smoke_gui.py
+```
+
+The script prints its imported package path and writes a diagram and window capture to
+a fresh temporary directory, or to `--output-dir`. Inspect the capture; assertions alone
+do not verify the visible preview. If the xvfb-run wrapper stalls in your container,
+start Xvfb separately and set DISPLAY to that server before running the same check.
