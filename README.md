@@ -12,7 +12,7 @@ picture that you can insert into documents or send to someone else.
 | --- | --- | --- |
 | Desktop editor | `app/` | Working prototype: Python, executable scripts, live Mermaid |
 | AI skill | `skills/inlay/` | Portable instructions and source metadata helper |
-| LibreOffice extension | `integrations/libreoffice/` | Planned; integration design only |
+| LibreOffice Writer extension | `integrations/libreoffice/` | Native embedded diagrams, source storage and editor integration |
 
 ## Install on Linux
 
@@ -56,13 +56,20 @@ python3 tools/build_skill.py
 
 The archive is written to `dist/inlay-skill.zip`.
 
+## LibreOffice Writer
+
+Install the editor, close LibreOffice normally, then run
+`./integrations/libreoffice/install.sh`. The new **Inlay** menu inserts and edits
+native diagram objects. Source and preview travel inside the ODT; recipients can
+view and print without the extension. [Installation and usage](integrations/libreoffice/README.md).
+
 ## Documentation
 
 - [Usage](docs/usage.md)
 - [PNG source format](docs/format.md)
 - [Development and tests](docs/development.md)
 - [Roadmap](docs/roadmap.md)
-- [LibreOffice integration plan](integrations/libreoffice/README.md)
+- [LibreOffice extension](integrations/libreoffice/README.md)
 
 Created by **sergeych** and **Codex (OpenAI)**. See [authors](AUTHORS.md).
 

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<oor:component-data xmlns:oor="http://openoffice.org/2001/registry" oor:name="Addons" oor:package="org.openoffice.Office">
+ <node oor:name="AddonUI"><node oor:name="OfficeMenuBar"><node oor:name="org.inlay.writer.menu" oor:op="replace">
+ <prop oor:name="Title"><value xml:lang="en-US">Inlay</value></prop>
+ <prop oor:name="Context"><value>com.sun.star.text.TextDocument</value></prop>
+ <node oor:name="Submenu">
+<node oor:name="insert" oor:op="replace"><prop oor:name="Title"><value xml:lang="en-US">Insert diagram…</value></prop><prop oor:name="URL"><value>org.inlay.writer:insert</value></prop><prop oor:name="Target"><value>_self</value></prop><prop oor:name="Context"><value>com.sun.star.text.TextDocument</value></prop></node>
+<node oor:name="edit" oor:op="replace"><prop oor:name="Title"><value xml:lang="en-US">Edit diagram</value></prop><prop oor:name="URL"><value>org.inlay.writer:edit</value></prop><prop oor:name="Target"><value>_self</value></prop><prop oor:name="Context"><value>com.sun.star.text.TextDocument</value></prop></node>
+<node oor:name="import" oor:op="replace"><prop oor:name="Title"><value xml:lang="en-US">Import Inlay PNG…</value></prop><prop oor:name="URL"><value>org.inlay.writer:import</value></prop><prop oor:name="Target"><value>_self</value></prop><prop oor:name="Context"><value>com.sun.star.text.TextDocument</value></prop></node>
+<node oor:name="export" oor:op="replace"><prop oor:name="Title"><value xml:lang="en-US">Export Inlay PNG…</value></prop><prop oor:name="URL"><value>org.inlay.writer:export</value></prop><prop oor:name="Target"><value>_self</value></prop><prop oor:name="Context"><value>com.sun.star.text.TextDocument</value></prop></node>
+</node></node></node></node></oor:component-data>

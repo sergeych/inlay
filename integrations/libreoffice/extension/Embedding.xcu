@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<oor:component-data xmlns:oor="http://openoffice.org/2001/registry" xmlns:xs="http://www.w3.org/2001/XMLSchema" oor:package="org.openoffice.Office" oor:name="Embedding">
+ <node oor:name="Objects"><node oor:name="A3299102-761D-48D5-A881-784269D7D480" oor:op="replace">
+ <prop oor:name="ObjectFactory"><value>org.inlay.EmbeddedFactory</value></prop>
+ <prop oor:name="ObjectMiscStatus"><value>16896</value></prop>
+ <prop oor:name="ObjectVerbs"><value>PRIMARY SHOW OPEN</value></prop>
+ </node></node>
+ <node oor:name="ObjectNames"><node oor:name="Inlay" oor:op="replace">
+ <prop oor:name="ObjectUIName"><value xml:lang="en-US">Inlay Diagram</value></prop>
+ <prop oor:name="ClassID"><value>A3299102-761D-48D5-A881-784269D7D480</value></prop>
+ </node></node>
+ <node oor:name="MimeTypeClassIDRelations"><prop oor:name="application/vnd.inlay.diagram" oor:op="replace" oor:type="xs:string"><value>A3299102-761D-48D5-A881-784269D7D480</value></prop></node>
+</oor:component-data>

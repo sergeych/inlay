@@ -23,6 +23,7 @@ jobs:
           "$RUNNER_TEMP/inlay install/bin/inlay" --help
       - run: python tools/sync_skill.py --check
       - run: python tools/build_skill.py
+      - run: python tools/build_libreoffice.py
       - run: python -m build app --outdir dist
       - uses: actions/upload-artifact@v4
         with:

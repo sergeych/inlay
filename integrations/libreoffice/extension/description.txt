@@ -1,0 +1,1 @@
+Native editable Inlay diagrams in Writer: insert, edit, import and export. Source and preview are embedded in the document. Viewing works without this extension. Requires the Inlay desktop editor for editing.

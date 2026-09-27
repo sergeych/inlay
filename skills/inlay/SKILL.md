@@ -46,4 +46,6 @@ Use `--source-type mermaid` for Mermaid; other types are `shell`, `executable`, 
 `unknown`. Outputs must be new paths: the helper refuses overwrite. Verify byte-for-byte
 recovery after embedding. Keep credentials and private paths out of distributable source.
 External assets still need separate delivery. PNG metadata can be stripped by other
-software, so retain sidecars. SVG editing and LibreOffice integration are not implemented.
+software, so retain sidecars. SVG editing is not implemented. The separate LibreOffice extension supports native
+Writer diagram objects with PNG import/export. Use it for open documents rather than
+rewriting an ODT behind Writer.
